@@ -17,7 +17,7 @@ nav {
 /*
  * Global layout stuff
  */
-
+ 
 body {
   color: #545149;
   background-color: #f4f1ec;
@@ -29,6 +29,10 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
- /*
- FOR TWEETER LOGO IN THE NAV:
- font-family: 'Bungee', cursive;*/
+ main {
+  padding: 120px;
+  width: 90%;
+  overflow-wrap: break-word;
+  margin:0 auto;
+  color: #545149
+}

@@ -1,7 +1,7 @@
 header {
   width: 100%;
   height: 400px;
-  position: absolute;
+  position: relative;
   text-align: center;
   top: 120px;
   background-color: #a15b40;
