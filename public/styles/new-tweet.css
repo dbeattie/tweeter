@@ -1,0 +1,20 @@
+input {
+  color: #FFFFFF;
+  font-family: 'Bungee', sans-serif;
+  background-color: #4056A1;
+  border: none;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  border: none;
+  border-bottom: 3px solid #545149;
+  padding: 5px;
+  background-color: transparent;
+
+}
+
+.counter {
+  float: right;
+}
