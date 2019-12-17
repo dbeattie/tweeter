@@ -1,13 +1,11 @@
 
 nav {
   position: fixed;
-  height: 120px;
+  height: 110px;
   width: 100%;
   z-index: 9999;
-  background-color: #4056A1;
-  
+  background-color: #303C6C;
   color: #FFFFFF;
-      
   padding: 1.5em;
 }
 

@@ -3,9 +3,14 @@ header {
   height: 400px;
   position: relative;
   text-align: center;
-  top: 120px;
-  background-color: #a15b40;
+  top: 110px;
+  background-color: #F4976C;
   color: #ffffff;
-  background-image: url('/images/header-background-brick-wall.png');
+  background-image: url('/images/header-background-stardust.png');
 }
+
+/* h2 { 
+  position: relative; 
+  top: -25px;
+} */
 
