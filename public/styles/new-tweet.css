@@ -9,8 +9,8 @@ textarea {
   resize: none;
   width: 100%;
   border: none;
-  border-bottom: 3px solid #545149;
-  padding: 5px;
+  border-bottom: 4px solid #545149;
+  padding: 0.5em;
   background-color: transparent;
 
 }

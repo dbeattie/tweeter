@@ -1,0 +1,41 @@
+article {
+  border: 4px solid #545149;
+  margin-top: 1.5em; 
+  margin-bottom: 1.5em;
+}
+
+article.tweet > header {
+  padding-left: 1em; 
+  padding-right: 1em;
+}
+
+article.tweet > header > p > span {
+  float: right;
+  color: #abaeb6;
+  visibility: hidden;
+}
+
+article.tweet > p {
+  border-bottom: 4px solid #545149;
+  padding: 0.25em;
+  margin-left: 1em; 
+  margin-right: 1em;
+}
+
+article.tweet > footer {
+  padding-left: 2em;
+  padding-right: 2em;
+  font-size: 15px;
+}
+
+article.tweet > footer > p > span {
+  float: right;
+}
+
+article:hover {
+  box-shadow: 8px 5px 5px #abaeb6;
+}
+
+article:hover header > p > span {
+  visibility: visible;
+}
