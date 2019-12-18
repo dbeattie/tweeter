@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $(".new-tweet textarea").on('keyup', function() {    
+  $(".new-tweet textarea").on('keydown', function() {    
     const remainingChar = 140 - $(this).val().length;
     const charCounter = $(this).closest(".new-tweet").find(".counter");
     if (remainingChar < 0){

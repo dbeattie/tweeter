@@ -54,7 +54,15 @@ $(document).ready(function() {
       }) 
   }
 
-  $("#submit").submit(function(event) {
+  $("#submit").submit(function(event) {  
+    const wordCount = $(this).find("textarea").val().length;
+    if (wordCount === 0) {
+      alert("Form Cannot Be Empty");
+      event.preventDefault();
+    } else if (wordCount > 140) {
+      alert("Form cannot exceed 140 characters");
+      event.preventDefault();
+    } else {
     event.preventDefault();    
       $.ajax({
         url: $(this).attr("action"),
@@ -66,7 +74,8 @@ $(document).ready(function() {
         console.log('POST SUCCESS!');
       }).fail(function() {
         console.log('POST FAILED!');
-    });
+      });
+    }
   });
 
   loadTweets();
