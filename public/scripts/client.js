@@ -5,31 +5,6 @@
  */
 
 $(document).ready(function() {
-  const data = [
-    {
-      "user": {
-        "name": "Newton",
-        "avatars": "https://i.imgur.com/73hZDYK.png"
-        ,
-        "handle": "@SirIsaac"
-      },
-      "content": {
-        "text": "If I have seen further it is by standing on the shoulders of giants"
-      },
-      "created_at": 1461116232227
-    },
-    {
-      "user": {
-        "name": "Descartes",
-        "avatars": "https://i.imgur.com/nlhLi3I.png",
-        "handle": "@rd" },
-      "content": {
-        "text": "Je pense , donc je suis"
-      },
-      "created_at": 1461113959088
-    }
-  ]
-  
 
   const createTweetElement = function(tweet) {
     let $tweet = $('<article>').addClass('tweet');
@@ -64,22 +39,36 @@ $(document).ready(function() {
       $('#tweet-container').prepend(createTweetElement(tweet));
     })  
   };
-  
-  renderTweets(data)
+
+  const loadTweets = function() {    
+    console.log('Performing ajax call...');
+    $.ajax({
+      url: "/tweets",
+      dataType: "json",
+      method: "GET",
+      }).done(function(db) {
+        console.log("GET SUCCESS");
+        renderTweets(db);
+      }).fail(function() {
+        console.log("GET FAILED");
+      }) 
+  }
 
   $("#submit").submit(function(event) {
     event.preventDefault();    
-    console.log('Submit pressed, performing ajax call...');
-    console.log($(this).find("textarea").serialize());
       $.ajax({
         url: $(this).attr("action"),
         method: $(this).attr("method"),
-        datatype: "text",
+        dataType: "text",
+        contentType: "application/x-www-form-urlencoded",
         data: $(this).find("textarea").serialize(),
-      }).done(function(data) {
-        console.log('SUCCESS: ', data);
-      }).fail(function(data) {
-        console.log('FAILED', data);
+      }).done(function() {
+        console.log('POST SUCCESS!');
+      }).fail(function() {
+        console.log('POST FAILED!');
     });
   });
+
+  loadTweets();
+
 });   
