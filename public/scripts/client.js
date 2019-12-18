@@ -5,23 +5,41 @@
  */
 
 $(document).ready(function() {
-  const tweetData = {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png",
-      "handle": "@SirIsaac"
+  const data = [
+    {
+      "user": {
+        "name": "Newton",
+        "avatars": "https://i.imgur.com/73hZDYK.png"
+        ,
+        "handle": "@SirIsaac"
       },
-    "content": {
+      "content": {
         "text": "If I have seen further it is by standing on the shoulders of giants"
       },
-    "created_at": 1461116232227
-  }
+      "created_at": 1461116232227
+    },
+    {
+      "user": {
+        "name": "Descartes",
+        "avatars": "https://i.imgur.com/nlhLi3I.png",
+        "handle": "@rd" },
+      "content": {
+        "text": "Je pense , donc je suis"
+      },
+      "created_at": 1461113959088
+    }
+  ]
   
+
   const createTweetElement = function(tweet) {
     let $tweet = $('<article>').addClass('tweet');
-    const htmlCode = `
+    const millisecondsToDays = 60 * 60 * 24 * 1000;
+    const daysAgo = function() {
+      return Math.floor(((new Date().getTime()) - tweet.created_at)/millisecondsToDays);
+    }
+    const html = `
     <header>
-      <img src="${tweetData.user.avatars}">         
+      <img src="${tweet.user.avatars}">         
       <p>
         ${tweet.user.name}
         <span>${tweet.user.handle}</span>
@@ -29,22 +47,24 @@ $(document).ready(function() {
     </header>
     <p>${tweet.content.text}</p>
     <footer>
-      <p>${Math.floor(((new Date().getTime()) - tweet.created_at)/86400000)} days ago
+      <p>${daysAgo(tweet)} days ago
         <span>                
           <i class="fa fa-flag">&#160</i>
           <i class="fa fa-retweet">&#160</i>
           <i class="fa fa-heart"></i>
         </span>
       </p>                            
-    </footer>
-    `;
-    $tweet.append(htmlCode);
+    </footer>`;
+    $tweet.append(html);
     return $tweet;
   }
+
+  const renderTweets = function(tweets) {
+    tweets.forEach(tweet => {
+      $('#tweet-container').prepend(createTweetElement(tweet));
+    })  
+  };
   
-  const $tweet = createTweetElement(tweetData);
-  
-  // Test / driver code (temporary)
-  console.log($tweet); // to see what it looks like
-  $('#tweets-container').append($tweet); // to add it to the page so we can make sure it's got all the right elements, classes, etc.
+  renderTweets(data)
+
 });
