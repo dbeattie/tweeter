@@ -4,9 +4,16 @@ article {
   margin-bottom: 1.5em;
 }
 
+article.tweet > header > img {
+  float: left;
+  padding-right: 0.5em;
+  padding-top: 0.3em;
+}
+
 article.tweet > header {
   padding-left: 1em; 
   padding-right: 1em;
+  padding-top: 0.1em;
 }
 
 article.tweet > header > p > span {
