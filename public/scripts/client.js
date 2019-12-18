@@ -6,6 +6,13 @@
 
 $(document).ready(function() {
 
+  //PREVENTS XSS ATTACKS WHEN WRAPPED AROUND USER INPUTTED TEXT
+  const escape =  function(str) {
+    let div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
   const createTweetElement = function(tweet) {
     let $tweet = $('<article>').addClass('tweet');
     const millisecondsToDays = 60 * 60 * 24 * 1000;
@@ -20,7 +27,7 @@ $(document).ready(function() {
         <span>${tweet.user.handle}</span>
       </p>                     
     </header>
-    <p>${tweet.content.text}</p>
+    <p>${escape(tweet.content.text)}</p>
     <footer>
       <p>${daysAgo(tweet)} days ago
         <span>                
@@ -63,7 +70,7 @@ $(document).ready(function() {
       alert("Form cannot exceed 140 characters");
       event.preventDefault();
     } else {
-    event.preventDefault();    
+      event.preventDefault();    
       $.ajax({
         url: $(this).attr("action"),
         method: $(this).attr("method"),
@@ -71,6 +78,7 @@ $(document).ready(function() {
         contentType: "application/x-www-form-urlencoded",
         data: $(this).find("textarea").serialize(),
       }).done(function() {
+        loadTweets();
         console.log('POST SUCCESS!');
       }).fail(function() {
         console.log('POST FAILED!');
