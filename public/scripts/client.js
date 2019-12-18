@@ -67,4 +67,19 @@ $(document).ready(function() {
   
   renderTweets(data)
 
-});
+  $("#submit").submit(function(event) {
+    event.preventDefault();    
+    console.log('Submit pressed, performing ajax call...');
+    console.log($(this).find("textarea").serialize());
+      $.ajax({
+        url: $(this).attr("action"),
+        method: $(this).attr("method"),
+        datatype: "text",
+        data: $(this).find("textarea").serialize(),
+      }).done(function(data) {
+        console.log('SUCCESS: ', data);
+      }).fail(function(data) {
+        console.log('FAILED', data);
+    });
+  });
+});   
