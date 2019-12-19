@@ -6,11 +6,11 @@ This forked and cloned repository is my final representation of the project main
 
 ## Screenshots
 
-!["Screenshot of Closed Tweet Box Desktop View"](https://example.link)
+!["Screenshot of Closed Tweet Box Desktop View"](https://github.com/dbeattie/tweeter/blob/master/docs/screenshots/Desktop%20Example.png?raw=true)
 
-!["Screenshot of Tweet Box Displayed Mobile View"](https://example.link)
+!["Screenshot of Tweet Box Displayed Mobile View"](https://github.com/dbeattie/tweeter/blob/master/docs/screenshots/Mobile%20View%20Compose%20Tweet%20Available.png?raw=true)
 
-!["Screenshot of Tweet Box Error Message"](https://example.link)
+!["Screenshot of Tweet Box Error Message"](https://github.com/dbeattie/tweeter/blob/master/docs/screenshots/Compose%20Tweet%20Error.png?raw=true)
 
 
 ## Getting Started
@@ -24,4 +24,3 @@ This forked and cloned repository is my final representation of the project main
 
 - Express
 - Node 5.10.x or above
-- Nodemon
