@@ -21,3 +21,10 @@ textarea {
 .char-limit {
   color: #DB2929
 }
+
+#error{
+  border: 5px solid #DB2929;
+  color: #DB2929;
+  text-align: center;
+  padding: 0.5em;
+}

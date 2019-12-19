@@ -37,6 +37,10 @@ article.tweet > footer {
 
 article.tweet > footer > p > span {
   float: right;
+  visibility: hidden
+}
+article:hover > footer > p > span {
+  visibility: visible;
 }
 
 article:hover {

@@ -4,14 +4,30 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+//PREVENTS XSS ATTACKS WHEN WRAPPED AROUND USER INPUTTED TEXT
+const escape =  function(str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
 $(document).ready(function() {
 
-  //PREVENTS XSS ATTACKS WHEN WRAPPED AROUND USER INPUTTED TEXT
-  const escape =  function(str) {
-    let div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  }
+  $(".new-tweet").hide();
+  $("#error").hide();
+
+  // SLIDE TOGGLE FUNCTION JQUERY --> TIED TO NEW TWEET CLASS
+  $(".slide-toggle").click(function(){
+    event.preventDefault();
+    if ($("#nav-icon").hasClass("fa-angle-double-down")) {
+      $("#nav-icon").toggleClass("fa-angle-double-up");
+    }
+    $(".new-tweet").slideToggle();
+    $('html, body').animate({
+      scrollTop: $(".new-tweet").offset().top
+    }, 1000);
+    $(".new-tweet textarea").focus();
+  });
 
   const createTweetElement = function(tweet) {
     let $tweet = $('<article>').addClass('tweet');
@@ -64,10 +80,14 @@ $(document).ready(function() {
   $("#submit").submit(function(event) {  
     const wordCount = $(this).find("textarea").val().length;
     if (wordCount === 0) {
-      alert("Form Cannot Be Empty");
+      $("#error").text("⚠️Well you have to tweet something!⚠️");
+      $("#error").slideDown().delay(3000);
+      $("#error").hide(800);
       event.preventDefault();
     } else if (wordCount > 140) {
-      alert("Form cannot exceed 140 characters");
+      $("#error").text("⚠️Please respect our arbitrary 140 char limit!⚠️");
+      $("#error").slideDown().delay(3000);;
+      $("#error").hide(800);
       event.preventDefault();
     } else {
       event.preventDefault();    
@@ -78,6 +98,8 @@ $(document).ready(function() {
         contentType: "application/x-www-form-urlencoded",
         data: $(this).find("textarea").serialize(),
       }).done(function() {
+        $("#tweet-text").val('')
+        $(".counter").text(140);
         loadTweets();
         console.log('POST SUCCESS!');
       }).fail(function() {
