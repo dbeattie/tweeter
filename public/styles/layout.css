@@ -33,6 +33,26 @@ body {
   padding-top: 110px;
   width: 90%;
   overflow-wrap: break-word;
-  margin:0 auto;
+  margin: auto;
   color: #545149
+}
+
+/* Desktop styles */
+@media only screen and (min-width: 1024px) {
+  body > header.page-header {    
+    width: 30vw;
+    float: right;    
+    margin: 3rem 2rem 0 0;    
+  }
+
+  .container {
+    width: 60vw;
+    float: left;    
+    padding-left: 2rem;
+  }
+
+  body > main.container {
+    padding-top: 7.75rem;
+  }
+
 }

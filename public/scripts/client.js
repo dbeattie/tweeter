@@ -9,15 +9,15 @@ const escape =  function(str) {
   let div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
-}
+};
 
 $(document).ready(function() {
 
   $(".new-tweet").hide();
   $("#error").hide();
 
-  // SLIDE TOGGLE FUNCTION JQUERY --> TIED TO NEW TWEET CLASS
-  $(".slide-toggle").click(function(){
+  // TOGGLES TWEET CONTAINER VISIBILITY
+  $(".slide-toggle").click(function() {
     event.preventDefault();
     if ($("#nav-icon").hasClass("fa-angle-double-down")) {
       $("#nav-icon").toggleClass("fa-angle-double-up");
@@ -33,8 +33,8 @@ $(document).ready(function() {
     let $tweet = $('<article>').addClass('tweet');
     const millisecondsToDays = 60 * 60 * 24 * 1000;
     const daysAgo = function() {
-      return Math.floor(((new Date().getTime()) - tweet.created_at)/millisecondsToDays);
-    }
+      return Math.floor(((new Date().getTime()) - tweet.created_at) / millisecondsToDays);
+    };
     const html = `
     <header>
       <img src="${tweet.user.avatars}">         
@@ -53,44 +53,50 @@ $(document).ready(function() {
         </span>
       </p>                            
     </footer>`;
+    
     $tweet.append(html);
     return $tweet;
-  }
+  };
 
   const renderTweets = function(tweets) {
     tweets.forEach(tweet => {
       $('#tweet-container').prepend(createTweetElement(tweet));
-    })  
+    });
   };
 
-  const loadTweets = function() {    
+  const loadTweets = function() {
     console.log('Performing ajax call...');
     $.ajax({
       url: "/tweets",
       dataType: "json",
       method: "GET",
-      }).done(function(db) {
-        console.log("GET SUCCESS");
-        renderTweets(db);
-      }).fail(function() {
-        console.log("GET FAILED");
-      }) 
-  }
+    }).done(function(db) {
+      console.log("GET SUCCESS");
+      renderTweets(db);
+    }).fail(function() {
+      console.log("GET FAILED");
+    });
+  };
 
-  $("#submit").submit(function(event) {  
+  //FORM SUBMISSION REQUIREMENTS & AJAX REQUEST
+  $("#submit").submit(function(event) {
     const wordCount = $(this).find("textarea").val().length;
     if (wordCount === 0) {
       $("#error").text("⚠️Well you have to tweet something!⚠️");
-      $("#error").slideDown().delay(3000);
-      $("#error").hide(800);
+      $("#error").slideDown();
+      $(".new-tweet textarea").on('keydown', function() {
+        $("#error").slideUp();
+      });
       event.preventDefault();
     } else if (wordCount > 140) {
       $("#error").text("⚠️Please respect our arbitrary 140 char limit!⚠️");
-      $("#error").slideDown().delay(3000);;
-      $("#error").hide(800);
+      $("#error").slideDown();
+      $(".new-tweet textarea").on('keydown', function() {
+        $("#error").slideUp();
+      });
       event.preventDefault();
     } else {
-      event.preventDefault();    
+      event.preventDefault();
       $.ajax({
         url: $(this).attr("action"),
         method: $(this).attr("method"),
@@ -98,7 +104,7 @@ $(document).ready(function() {
         contentType: "application/x-www-form-urlencoded",
         data: $(this).find("textarea").serialize(),
       }).done(function() {
-        $("#tweet-text").val('')
+        $("#tweet-text").val('');
         $(".counter").text(140);
         loadTweets();
         console.log('POST SUCCESS!');
@@ -110,4 +116,4 @@ $(document).ready(function() {
 
   loadTweets();
 
-});   
+});

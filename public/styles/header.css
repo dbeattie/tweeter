@@ -8,3 +8,7 @@ header.page-header {
   color: #ffffff;
   background-image: url('/images/header-background-stardust.png');
 }
+
+header.page-header > .img {
+  padding-top: 1rem
+}
